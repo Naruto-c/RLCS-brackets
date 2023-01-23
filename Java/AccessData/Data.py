@@ -16,5 +16,15 @@ shootingPercentage = []  # Shooting percentrage of each team
 driver.get("https://octane.gg/stats/teams?mode=3&minGames=50&group=rlcs2122fall")
 
 content = driver.page_source
-soup = BeautifulSoup(content)
-for a in soup.findAll('a', href=True, attrs={'class': 'css-8d3ssv'}):
+soup = BeautifulSoup('features = "lxml"')
+for a in soup.findAll('div', href=True, attrs={'class': 'chakra-stack css-8g1510'}, recursive=True):
+    name = a.find(
+        'a', attrs={'class': 'chakra-link css-1r88v6v', 'align': 'start'})
+    image = a.find('img', attrs={'class': 'chakra-image css-10xqgwl'})
+    teamName.append(name.text)
+    teamImage.append(image.text)
+
+teamName.append(1)
+teamImage.append(1)
+df = pd.DataFrame({'Team Name:': teamName, 'Image:': teamImage})
+df.to_csv('Teams.csv', index=False, encoding='utf-8')
