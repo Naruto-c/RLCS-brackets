@@ -26,6 +26,6 @@ for a in soup.find_all('table'):
     print(name.text)
     print(image)
 
-teamImage.append("hi")
+teamImage.append("No image yet")
 df = pd.DataFrame({'Team Name:': teamName, 'Image:': teamImage})
 df.to_csv('Teams.csv', index=False, encoding='utf-8')
