@@ -19,12 +19,13 @@ content = driver.page_source
 num = 1
 soup = BeautifulSoup(content, 'html.parser')
 for a in soup.find_all('table'):
-    name = a.find('div', attrs={'class': 'chakra-link css-1r88v6v'})
+    name = a.find('a', attrs={'class': 'chakra-link css-1r88v6v'})
     image = a.find('img', attrs={'class': 'chakra-image css-10xqgwl'})
-    print(name)
+    teamName.append(name.text)
+    # teamName.append(image.getText())
+    print(name.text)
     print(image)
 
-teamName.append("hi")
 teamImage.append("hi")
 df = pd.DataFrame({'Team Name:': teamName, 'Image:': teamImage})
 df.to_csv('Teams.csv', index=False, encoding='utf-8')
