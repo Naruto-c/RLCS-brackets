@@ -17,16 +17,12 @@ driver.get("https://octane.gg/stats/teams?mode=3&region=NA&region=EU&region=OCE&
 
 content = driver.page_source
 num = 1
-soup = BeautifulSoup('features = "html.parser"')
-for a in soup.find_all('div', href=True, attrs={'class': 'css-8d3ssv'}):
-    # name = a.find('div', attrs={'class': 'chakra-link css-1r88v6v'})
-    # image = a.find('img', attrs={'class': 'chakra-image css-10xqgwl'})
-    # teamName.append(name.text)
-    # teamImage.append(image.text)
-    teamName.append(num)
-    teamImage.append(num)
-    num += 1
-    print(a)
+soup = BeautifulSoup(content, 'html.parser')
+for a in soup.find_all('table'):
+    name = a.find('div', attrs={'class': 'chakra-link css-1r88v6v'})
+    image = a.find('img', attrs={'class': 'chakra-image css-10xqgwl'})
+    print(name)
+    print(image)
 
 teamName.append("hi")
 teamImage.append("hi")
