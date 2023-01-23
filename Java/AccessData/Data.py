@@ -13,12 +13,12 @@ assistsPerGame = []  # Average assists per game of each team
 savesPerGame = []  # Average saves per game of each team
 shotsPerGame = []  # Average shots per game of each team
 shootingPercentage = []  # Shooting percentrage of each team
-driver.get("https://octane.gg/stats/teams?mode=3&minGames=50&group=rlcs2122fall")
+driver.get("https://octane.gg/stats/teams?mode=3&region=NA&region=EU&region=OCE&region=SAM&region=ASIA&region=ME&region=AF&region=INT&minGames=250")
 
 content = driver.page_source
 num = 1
 soup = BeautifulSoup('features = "lxml"')
-for a in soup.findAll('div', attrs={'class': 'css-8d3ssv'}):
+for a in soup.find_all('div', attrs={'class': 'css-8d3ssv'}):
     # name = a.find('div', attrs={'class': 'chakra-link css-1r88v6v'})
     # image = a.find('img', attrs={'class': 'chakra-image css-10xqgwl'})
     # teamName.append(name.text)
