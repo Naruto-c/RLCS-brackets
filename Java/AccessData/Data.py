@@ -16,16 +16,15 @@ shootingPercentage = []  # Shooting percentrage of each team
 driver.get("https://octane.gg/stats/teams?mode=3&region=NA&region=EU&region=OCE&region=SAM&region=ASIA&region=ME&region=AF&region=INT&minGames=250")
 
 content = driver.page_source
-num = 1
 soup = BeautifulSoup(content, 'html.parser')
-for a in soup.find_all('table'):
+for a in soup.find_all('tr'):
     name = a.find('a', attrs={'class': 'chakra-link css-1r88v6v'})
     image = a.find('img', attrs={'class': 'chakra-image css-10xqgwl'})
-    teamName.append(name.text)
-    # teamName.append(image.getText())
-    print(name.text)
-    print(image)
+    print(type(name))
+    print(soup)
+    # print(name.text())
+    teamName.append(name)
+    teamImage.append(image)
 
-teamImage.append("No image yet")
 df = pd.DataFrame({'Team Name:': teamName, 'Image:': teamImage})
 df.to_csv('Teams.csv', index=False, encoding='utf-8')
