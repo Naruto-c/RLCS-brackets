@@ -26,6 +26,8 @@ for a in soup.find_all('tr'):
     if not (name is None):
         # Appending team name
         teamName.append(name.get_text())
+    else:
+        teamName.append("N/A")
     if not (image is None):
         data = image.get('src')
         print(data)
