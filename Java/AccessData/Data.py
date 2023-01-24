@@ -28,8 +28,8 @@ for a in soup.find_all('tr'):
         teamName.append(name.get_text())
     if not (image is None):
         data = image.get('src')
-        print(image)
-        teamImage.append(image)
+        print(data)
+        teamImage.append(data)
     else:
         teamImage.append("N/A")
 
