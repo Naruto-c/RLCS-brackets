@@ -7,6 +7,7 @@ driver = webdriver.Chrome("/usr/local/bin/chromedriver")
 
 teamName = []  # Gets the team name
 teamImage = []  # Ges the image of the team
+gamesPlayed = []  # How many games the team has played
 winPercentage = []  # Win percentage of each team
 goalsPerGame = []  # Average goals per game of each team
 assistsPerGame = []  # Average assists per game of each team
@@ -17,19 +18,11 @@ driver.get("https://octane.gg/stats/teams?mode=3&region=NA&region=EU&region=OCE&
 
 content = driver.page_source
 soup = BeautifulSoup(content, 'html.parser')
-num = 1
-num2 = 1
-num3 = 1
 for a in soup.find_all('tr'):
     name = a.find('a', attrs={'class': 'chakra-link css-1r88v6v'})
     image = a.find('img', attrs={'class': 'chakra-image css-10xqgwl'})
     winRate = a.find('div', attrs={'class': 'css-gm45eu'})
-    # goals = a.find('div', attrs={'class': 'css-z5nod'})
-    # assists = a.find('div', attrs={'class': 'css-z5nod'})
-    # saves
-    # shots
-    # shootingPercent
-
+    games = a.find('div', attrs={'class': 'css-z5nod'})
     # I literally have no idea why, but the first 'a' tag is none
     # Therefore, to call .get_text(), make sure that it's a tag element, not none
     if not (name is None):
@@ -42,12 +35,21 @@ for a in soup.find_all('tr'):
         teamImage.append(data)
     else:
         teamImage.append("/images/logo.svg")
+    if not (games is None):
+        gamesPlayed.append(games.get_text())
+    else:
+        gamesPlayed.append("N/A")
     if not (winRate is None):
         winPercentage.append(winRate.get_text())
     else:
         winPercentage.append("N/A")
 
+    # assists = a.find('div', attrs={'class': 'css-z5nod'})
+    # saves = a.find('div', attrs={'class': 'css-z5nod'})
+    # shots = a.find('div', attrs={'class': 'css-z5nod'})
+    # shootingPercent = a.find('div', attrs={'class': 'css-z5nod'})
+
 
 df = pd.DataFrame(
-    {'Team Name:': teamName, 'Image:': teamImage, "Win Rate: ": winPercentage})
+    {'Team Name:': teamName, 'Image:': teamImage, 'Games Played:': gamesPlayed, 'Win Rate:': winPercentage})
 df.to_csv('Teams.csv', index=False, encoding='utf-8')
