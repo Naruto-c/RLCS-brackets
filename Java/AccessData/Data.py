@@ -17,9 +17,18 @@ driver.get("https://octane.gg/stats/teams?mode=3&region=NA&region=EU&region=OCE&
 
 content = driver.page_source
 soup = BeautifulSoup(content, 'html.parser')
+num = 1
+num2 = 1
+num3 = 1
 for a in soup.find_all('tr'):
     name = a.find('a', attrs={'class': 'chakra-link css-1r88v6v'})
     image = a.find('img', attrs={'class': 'chakra-image css-10xqgwl'})
+    winRate = a.find('div', attrs={'class': 'css-gm45eu'})
+    # goals = a.find('div', attrs={'class': 'css-z5nod'})
+    # assists = a.find('div', attrs={'class': 'css-z5nod'})
+    # saves
+    # shots
+    # shootingPercent
 
     # I literally have no idea why, but the first 'a' tag is none
     # Therefore, to call .get_text(), make sure that it's a tag element, not none
@@ -30,11 +39,15 @@ for a in soup.find_all('tr'):
         teamName.append("N/A")
     if not (image is None):
         data = image.get('src')
-        print(data)
         teamImage.append(data)
     else:
-        teamImage.append("N/A")
+        teamImage.append("/images/logo.svg")
+    if not (winRate is None):
+        winPercentage.append(winRate.get_text())
+    else:
+        winPercentage.append("N/A")
 
 
-df = pd.DataFrame({'Team Name:': teamName, 'Image:': teamImage})
+df = pd.DataFrame(
+    {'Team Name:': teamName, 'Image:': teamImage, "Win Rate: ": winPercentage})
 df.to_csv('Teams.csv', index=False, encoding='utf-8')
