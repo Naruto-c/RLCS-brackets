@@ -20,11 +20,18 @@ soup = BeautifulSoup(content, 'html.parser')
 for a in soup.find_all('tr'):
     name = a.find('a', attrs={'class': 'chakra-link css-1r88v6v'})
     image = a.find('img', attrs={'class': 'chakra-image css-10xqgwl'})
-    print(type(name))
-    print(soup)
-    # print(name.text())
-    teamName.append(name)
-    teamImage.append(image)
+    
+    # I literally have no idea why, but the first 'a' tag is none
+    # Therefore, to call .get_text(), make sure that it's a tag element, not none
+    if not(name is None): 
+        print(type(name))
+        print(name)
+        #print(soup)
+        print(name.get_text())
+        # Appending team name
+        teamName.append(name.get_text())
+        teamImage.append(image)
+   
 
 df = pd.DataFrame({'Team Name:': teamName, 'Image:': teamImage})
 df.to_csv('Teams.csv', index=False, encoding='utf-8')
