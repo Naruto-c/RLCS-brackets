@@ -13,7 +13,7 @@ goalsPerGame = []  # Average goals per game of each team
 assistsPerGame = []  # Average assists per game of each team
 savesPerGame = []  # Average saves per game of each team
 shotsPerGame = []  # Average shots per game of each team
-shootingPercentage = []  # Shooting percentrage of each team
+shootingPercentage = []  # Shooting percentage of each team
 driver.get("https://octane.gg/stats/teams?mode=3&region=NA&region=EU&region=OCE&region=SAM&region=ASIA&region=ME&region=AF&region=INT&minGames=250")
 
 content = driver.page_source
