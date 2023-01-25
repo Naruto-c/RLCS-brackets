@@ -47,7 +47,7 @@ for a in soup.find_all('tr'):
     if not goals:
         continue
     goalsCol = soup.find_all('td')[4].string
-    print(goalsCol)
+    goals.append(goalsCol)
 
     # assists = a.find('div', attrs={'class': 'css-z5nod'})
     # saves = a.find('div', attrs={'class': 'css-z5nod'})
@@ -56,5 +56,5 @@ for a in soup.find_all('tr'):
 
 
 df = pd.DataFrame(
-    {'Team Name:': teamName, 'Image:': teamImage, 'Games Played:': gamesPlayed, 'Win Rate:': winPercentage})
+    {'Team Name:': teamName, 'Image:': teamImage, 'Games Played:': gamesPlayed, 'Win Rate:': winPercentage, 'Goals:': goalsPerGame})
 df.to_csv('Teams.csv', index=False, encoding='utf-8')
