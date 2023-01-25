@@ -18,6 +18,15 @@ driver.get("https://octane.gg/stats/teams?mode=3&region=NA&region=EU&region=OCE&
 
 content = driver.page_source
 soup = BeautifulSoup(content, 'html.parser')
+
+def append_text (list, text) : 
+    
+    if text is not None:
+        list.append(name.get_text())
+    else:
+        list.append("N/A")
+    
+
 for a in soup.find_all('tr'):
     name = a.find('a', attrs={'class': 'chakra-link css-1r88v6v'})
     image = a.find('img', attrs={'class': 'chakra-image css-10xqgwl'})
@@ -26,24 +35,18 @@ for a in soup.find_all('tr'):
     goals = soup.find_all('td')
     # I literally have no idea why, but the first 'a' tag is none
     # Therefore, to call .get_text(), make sure that it's a tag element, not none
-    if name is not None:
-        # Appending team name
-        teamName.append(name.get_text())
-    else:
-        teamName.append("N/A")
+    
+    append_text(teamName, name)
+    
     if image is not None:
         data = image.get('src')
         teamImage.append(data)
     else:
         teamImage.append("/images/logo.svg")
-    if games is not None:
-        gamesPlayed.append(games.get_text())
-    else:
-        gamesPlayed.append("N/A")
-    if winRate is not None:
-        winPercentage.append(winRate.get_text())
-    else:
-        winPercentage.append("N/A")
+        
+    append_text(gamesPlayed, games)
+    append_text(winPercentage, winRate)
+    
     if not goals:
         continue
     goalsCol = soup.find_all('td')[4].string
