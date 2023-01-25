@@ -20,7 +20,7 @@ model = make_pipeline(
 X = RLCS_Data['Played']
 y = RLCS_Data['Win %']
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=2)
+    X, y, test_size=None, random_state=2)
 model.fit(X_train, y_train)
 print('THE BASELINE ACCURACY IS: {}'.format(
     y_train.value_counts(normalize=True).max()))
