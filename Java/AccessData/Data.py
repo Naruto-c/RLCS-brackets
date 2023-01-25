@@ -23,6 +23,7 @@ for a in soup.find_all('tr'):
     image = a.find('img', attrs={'class': 'chakra-image css-10xqgwl'})
     winRate = a.find('div', attrs={'class': 'css-gm45eu'})
     games = a.find('div', attrs={'class': 'css-z5nod'})
+    goals = soup.find_all('td')
     # I literally have no idea why, but the first 'a' tag is none
     # Therefore, to call .get_text(), make sure that it's a tag element, not none
     if name is not None:
@@ -43,6 +44,10 @@ for a in soup.find_all('tr'):
         winPercentage.append(winRate.get_text())
     else:
         winPercentage.append("N/A")
+    if not goals:
+        continue
+    goalsCol = soup.find_all('td')[4].string
+    print(goalsCol)
 
     # assists = a.find('div', attrs={'class': 'css-z5nod'})
     # saves = a.find('div', attrs={'class': 'css-z5nod'})
