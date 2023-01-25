@@ -25,21 +25,21 @@ for a in soup.find_all('tr'):
     games = a.find('div', attrs={'class': 'css-z5nod'})
     # I literally have no idea why, but the first 'a' tag is none
     # Therefore, to call .get_text(), make sure that it's a tag element, not none
-    if not (name is None):
+    if name is not None:
         # Appending team name
         teamName.append(name.get_text())
     else:
         teamName.append("N/A")
-    if not (image is None):
+    if image is not None:
         data = image.get('src')
         teamImage.append(data)
     else:
         teamImage.append("/images/logo.svg")
-    if not (games is None):
+    if games is not None:
         gamesPlayed.append(games.get_text())
     else:
         gamesPlayed.append("N/A")
-    if not (winRate is None):
+    if winRate is not None:
         winPercentage.append(winRate.get_text())
     else:
         winPercentage.append("N/A")
