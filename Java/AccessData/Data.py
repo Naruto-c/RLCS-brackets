@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 
 webdriver_service = Service("./chromedriver")  # Your chromedriver path
 driver = webdriver.Chrome(service=webdriver_service)
-url = 'https://octane.gg/stats/teams?mode=3&region=NA&region=EU&region=OCE&region=SAM&region=ASIA&region=ME&region=AF&region=INT&minGames=250'
+url = 'https://octane.gg/stats/teams?mode=3&tier=S&tier=A&minGames=16&'
 driver.get(url)
 driver.maximize_window()
 time.sleep(3)
